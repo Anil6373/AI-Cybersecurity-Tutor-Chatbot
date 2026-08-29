@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Tutor AI — Learn Cybersecurity Smarter</title>
+  <link rel="stylesheet" href="Frontend/css/variables.css" />
+  <link rel="stylesheet" href="Frontend/css/base.css" />
+  <link rel="stylesheet" href="Frontend/css/landing.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    
+  <!-- Supabase & Auth Protection -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="Frontend/js/supabaseClient.js"></script>
+  <script src="Frontend/js/protectRoute.js"></script>
+  <script src="Frontend/js/userProfile.js"></script>
+</head>
+
+<body>
+
+  <!-- ── TOAST ── -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">Cyber<span class="accent">Tutor</span> AI</span>
+    </div>
+    <div class="nav-links">
+      <a href="Frontend/pages/chat.html">Chat</a>
+      <a href="Frontend/pages/quiz.html">Quiz</a>
+      <a href="Frontend/pages/roadmap.html">Roadmap</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <div class="user-profile-container" style="display:none; align-items:center; gap:8px; margin-right:16px;">
+        <div class="profile-avatar-text" style="width:28px; height:28px; background:var(--accent-blue); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:12px;">U</div>
+        <div class="profile-name-text" style="font-size:0.875rem; font-weight:500; color:var(--text-primary); display:none;">User</div>
+        <button class="logout-btn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:14px; margin-left:4px;" title="Logout">🚪</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <span class="theme-icon">☽</span>
+      </button>
+      <a href="Frontend/pages/chat.html" class="btn btn-primary">Launch App</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <!-- Grid background -->
+    <div class="hero-grid"></div>
+    <!-- Floating orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span> AI-Powered Learning Platform
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line">Cyber</span>
+          <span class="title-line accent-glow">Tutor AI</span>
+        </h1>
+        <p class="hero-tagline">Learn Cybersecurity Smarter</p>
+        <p class="hero-sub">
+          Master ethical hacking, network security, cryptography, and more —
+          with an AI tutor that adapts to your pace.
+        </p>
+        <div class="hero-cta">
+          <a href="Frontend/pages/chat.html" class="btn btn-primary btn-lg">
+            <span>Start Chatting</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="Frontend/pages/roadmap.html" class="btn btn-ghost btn-lg">View Roadmaps</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Topic Modules</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Quiz Questions</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">4</span><span class="stat-label">Career Paths</span></div>
+        </div>
+      </div>
+
+      <!-- Terminal mockup -->
+      <div class="hero-visual">
+        <div class="terminal-window">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">cyber-tutor ~ terminal</span>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="t-line"><span class="t-prompt">$</span> ask "What is SQL injection?"</div>
+            <div class="t-line t-response">▌ SQL injection is an attack where malicious SQL code is</div>
+            <div class="t-line t-response">&nbsp; inserted into input fields to manipulate a database...</div>
+            <div class="t-line t-blank"></div>
+            <div class="t-line"><span class="t-prompt">$</span> quiz --topic networking</div>
+            <div class="t-line t-response">▌ Starting quiz: Networking Fundamentals [10 questions]</div>
+            <div class="t-line t-blank"></div>
+            <div class="t-line"><span class="t-prompt">$</span> roadmap --level beginner<span
+                class="cursor-blink">█</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TOPIC CARDS ── -->
+  <section class="section topics-section" id="topics">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Explore Modules</p>
+        <h2 class="section-title">What Will You Learn?</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="topic-card" data-topic="networking" onclick="openTopic('networking')">
+          <div class="card-glow"></div>
+          <div class="card-icon">🌐</div>
+          <h3>Networking Basics</h3>
+          <p>TCP/IP, DNS, firewalls, VPNs, and packet analysis fundamentals.</p>
+          <div class="card-footer">
+            <span class="tag">Beginner</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="topic-card" data-topic="linux" onclick="openTopic('linux')">
+          <div class="card-glow"></div>
+          <div class="card-icon">🐧</div>
+          <h3>Linux Commands</h3>
+          <p>Shell scripting, permissions, process management and sysadmin skills.</p>
+          <div class="card-footer">
+            <span class="tag">Beginner</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="topic-card" data-topic="websec" onclick="openTopic('websec')">
+          <div class="card-glow"></div>
+          <div class="card-icon">🔐</div>
+          <h3>Web Security</h3>
+          <p>XSS, CSRF, SQL injection, OWASP Top 10, and secure coding practices.</p>
+          <div class="card-footer">
+            <span class="tag">Intermediate</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="topic-card" data-topic="crypto" onclick="openTopic('crypto')">
+          <div class="card-glow"></div>
+          <div class="card-icon">🔑</div>
+          <h3>Cryptography</h3>
+          <p>Symmetric &amp; asymmetric encryption, hashing, PKI, and TLS/SSL.</p>
+          <div class="card-footer">
+            <span class="tag">Intermediate</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="topic-card" data-topic="ethical" onclick="openTopic('ethical')">
+          <div class="card-glow"></div>
+          <div class="card-icon">⚔️</div>
+          <h3>Ethical Hacking</h3>
+          <p>Penetration testing, vulnerability assessment, and red-team tactics.</p>
+          <div class="card-footer">
+            <span class="tag">Advanced</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="topic-card" data-topic="career" onclick="openTopic('career')">
+          <div class="card-glow"></div>
+          <div class="card-icon">🚀</div>
+          <h3>Career Roadmaps</h3>
+          <p>Structured paths from beginner to job-ready security professional.</p>
+          <div class="card-footer">
+            <span class="tag">All Levels</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ── -->
+  <section class="section features-section">
+    <div class="features-inner">
+      <div class="feature-text">
+        <p class="section-eyebrow">Why Cyber Tutor AI?</p>
+        <h2 class="section-title">Built for Serious Learners</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="feat-icon">🤖</span>
+            <div>
+              <strong>AI-Powered Explanations</strong>
+              <p>Ask anything — get clear, accurate cybersecurity answers instantly.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feat-icon">🧠</span>
+            <div>
+              <strong>Adaptive Quizzes</strong>
+              <p>Test your knowledge with MCQ quizzes that track your progress.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feat-icon">🗺️</span>
+            <div>
+              <strong>Personalized Roadmaps</strong>
+              <p>Follow a structured learning path tailored to your career goals.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feat-icon">💾</span>
+            <div>
+              <strong>Chat History</strong>
+              <p>All your conversations saved locally — pick up where you left off.</p>
+            </div>
+          </li>
+        </ul>
+        <a href="Frontend/pages/chat.html" class="btn btn-primary">Get Started Free <span class="btn-arrow">→</span></a>
+      </div>
+      <div class="feature-visual">
+        <div class="feat-card-stack">
+          <div class="feat-card fc-1">
+            <span>🛡️</span>
+            <span>Security First</span>
+          </div>
+          <div class="feat-card fc-2">
+            <span>⚡</span>
+            <span>Fast Answers</span>
+          </div>
+          <div class="feat-card fc-3">
+            <span>📊</span>
+            <span>Track Progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Cyber<span class="accent">Tutor</span> AI</span>
+      </div>
+      <div class="footer-links">
+        <a href="Frontend/pages/chat.html">Chat</a>
+        <a href="Frontend/pages/quiz.html">Quiz</a>
+        <a href="Frontend/pages/roadmap.html">Roadmap</a>
+      </div>
+      <p class="footer-copy">© 2026 CyberTutor AI. Built for learners.</p>
+    </div>
+  </footer>
+
+  <!-- ── LOADING SPINNER ── -->
+  <div id="pageLoader" class="page-loader hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="Frontend/js/theme.js"></script>
+  <script src="Frontend/js/landing.js"></script>
+</body>
+
+</html>

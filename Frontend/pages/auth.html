@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Tutor AI — Secure Access</title>
+  <link rel="stylesheet" href="/>
+  <link rel=" preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet" />
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+  <!-- ── THEME TOGGLE ── -->
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+    <i data-lucide="sun" class="icon-sun"></i>
+    <i data-lucide="moon" class="icon-moon"></i>
+  </button>
+
+  <!-- ── TOAST ── -->
+  <div id="toast" class="toast" role="alert" aria-live="polite">
+    <span class="toast-icon"></span>
+    <span class="toast-msg"></span>
+  </div>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div class="auth-layout">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <!-- Ambient blobs -->
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <!-- Grid overlay -->
+      <div class="grid-overlay"></div>
+
+      <div class="left-content">
+        <!-- Logo -->
+        <div class="logo">
+          <div class="logo-hex">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 2L36 11V29L20 38L4 29V11L20 2Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+              <path d="M20 8L30 14V26L20 32L10 26V14L20 8Z" fill="currentColor" fill-opacity="0.15" />
+              <circle cx="20" cy="20" r="4" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="logo-text">Cyber<span>Tutor</span> AI</span>
+        </div>
+
+        <!-- Hero copy -->
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="dot-pulse"></span>
+            AI-Powered Learning Platform
+          </div>
+          <h1>Secure Access to<br /><em>Cyber Tutor AI</em></h1>
+          <p class="hero-sub">
+            Learn cybersecurity with AI guidance, quizzes, roadmaps, and
+            personalized progress tracking — all in one place.
+          </p>
+        </div>
+
+        <!-- Feature list -->
+        <ul class="feature-list">
+          <li>
+            <div class="feat-icon-wrap">
+              <i data-lucide="cpu"></i>
+            </div>
+            <div>
+              <strong>Multi AI Models</strong>
+              <span>Powered by Claude claude-sonnet-4-20250514 for precise answers</span>
+            </div>
+          </li>
+          <li>
+            <div class="feat-icon-wrap">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div>
+              <strong>Secure User Accounts</strong>
+              <span>Enterprise-grade auth with encrypted storage</span>
+            </div>
+          </li>
+          <li>
+            <div class="feat-icon-wrap">
+              <i data-lucide="bookmark"></i>
+            </div>
+            <div>
+              <strong>Saved Progress</strong>
+              <span>Pick up exactly where you left off, any device</span>
+            </div>
+          </li>
+          <li>
+            <div class="feat-icon-wrap">
+              <i data-lucide="map"></i>
+            </div>
+            <div>
+              <strong>Personalized Learning</strong>
+              <span>Adaptive roadmaps tailored to your skill level</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Trust badges -->
+        <div class="trust-row">
+          <div class="trust-badge"><i data-lucide="lock"></i> SOC 2 Ready</div>
+          <div class="trust-badge"><i data-lucide="zap"></i> 99.9% Uptime</div>
+          <div class="trust-badge"><i data-lucide="users"></i> 10k+ Learners</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="auth-card">
+
+        <!-- Card header -->
+        <div class="card-header">
+          <div class="logo logo-sm">
+            <div class="logo-hex logo-hex-sm">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2L36 11V29L20 38L4 29V11L20 2Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <circle cx="20" cy="20" r="4" fill="currentColor" />
+              </svg>
+            </div>
+            <span class="logo-text">Cyber<span>Tutor</span> AI</span>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tab-row" role="tablist">
+          <button class="tab active" id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login"
+            onclick="switchTab('login')">
+            Sign In
+          </button>
+          <button class="tab" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup"
+            onclick="switchTab('signup')">
+            Create Account
+          </button>
+          <div class="tab-indicator" id="tabIndicator"></div>
+        </div>
+
+        <!-- ─── LOGIN PANEL ─── -->
+        <div class="auth-panel active" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <div class="panel-header">
+            <h2>Welcome back</h2>
+            <p>Sign in to continue your learning journey.</p>
+          </div>
+
+          <!-- Google SSO -->
+          <button class="sso-btn" onclick="handleSSO('Google')">
+            <svg class="sso-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4" />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853" />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                fill="#FBBC05" />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335" />
+            </svg>
+            Continue with Google
+          </button>
+
+          <div class="divider"><span>or sign in with email</span></div>
+
+          <!-- Login form -->
+          <form id="loginForm" novalidate onsubmit="handleLogin(event)">
+            <!-- Email -->
+            <div class="field-group" id="fg-login-email">
+              <label for="login-email">Email or Phone</label>
+              <div class="input-wrap">
+                <i data-lucide="mail" class="input-icon"></i>
+                <input type="text" id="login-email" name="email" placeholder="you@example.com" autocomplete="email"
+                  aria-describedby="login-email-err" />
+              </div>
+              <span class="field-error" id="login-email-err" role="alert"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="field-group" id="fg-login-pass">
+              <div class="label-row">
+                <label for="login-password">Password</label>
+                <a href="#" class="forgot-link" onclick="showForgot(event)">Forgot password?</a>
+              </div>
+              <div class="input-wrap">
+                <i data-lucide="lock" class="input-icon"></i>
+                <input type="password" id="login-password" name="password" placeholder="••••••••"
+                  autocomplete="current-password" aria-describedby="login-pass-err" />
+                <button type="button" class="eye-btn" onclick="togglePwd('login-password', this)"
+                  aria-label="Show password">
+                  <i data-lucide="eye"></i>
+                </button>
+              </div>
+              <span class="field-error" id="login-pass-err" role="alert"></span>
+            </div>
+
+            <!-- Remember me -->
+            <div class="checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="remember" name="remember" />
+                <span class="checkbox-custom"></span>
+                <span>Remember me for 30 days</span>
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn" id="loginBtn">
+              <span class="btn-text">Sign In</span>
+              <span class="btn-loader" aria-hidden="true"></span>
+              <i data-lucide="arrow-right" class="btn-icon"></i>
+            </button>
+          </form>
+
+          <p class="switch-hint">
+            Don't have an account?
+            <button class="link-btn" onclick="switchTab('signup')">Create one →</button>
+          </p>
+        </div>
+
+        <!-- ─── SIGNUP PANEL ─── -->
+        <div class="auth-panel" id="panel-signup" role="tabpanel" aria-labelledby="tab-signup">
+          <div class="panel-header">
+            <h2>Create your account</h2>
+            <p>Join 10,000+ learners mastering cybersecurity.</p>
+          </div>
+
+          <!-- Google SSO -->
+          <button class="sso-btn" onclick="handleSSO('Google')">
+            <svg class="sso-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4" />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853" />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                fill="#FBBC05" />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335" />
+            </svg>
+            Continue with Google
+          </button>
+
+          <div class="divider"><span>or sign up with email</span></div>
+
+          <!-- Signup form -->
+          <form id="signupForm" novalidate onsubmit="handleSignup(event)">
+            <!-- Name row -->
+            <div class="field-row-2">
+              <div class="field-group" id="fg-fname">
+                <label for="fname">First Name</label>
+                <div class="input-wrap">
+                  <i data-lucide="user" class="input-icon"></i>
+                  <input type="text" id="fname" name="fname" placeholder="Ada" autocomplete="given-name"
+                    aria-describedby="fname-err" />
+                </div>
+                <span class="field-error" id="fname-err" role="alert"></span>
+              </div>
+              <div class="field-group" id="fg-lname">
+                <label for="lname">Last Name</label>
+                <div class="input-wrap">
+                  <i data-lucide="user" class="input-icon"></i>
+                  <input type="text" id="lname" name="lname" placeholder="Lovelace" autocomplete="family-name"
+                    aria-describedby="lname-err" />
+                </div>
+                <span class="field-error" id="lname-err" role="alert"></span>
+              </div>
+            </div>
+
+            <!-- Username -->
+            <div class="field-group" id="fg-username">
+              <label for="username">Username</label>
+              <div class="input-wrap">
+                <i data-lucide="at-sign" class="input-icon"></i>
+                <input type="text" id="username" name="username" placeholder="ada_lovelace" autocomplete="username"
+                  aria-describedby="username-err" oninput="checkUsername(this)" />
+                <span class="username-status" id="usernameStatus" aria-live="polite"></span>
+              </div>
+              <span class="field-error" id="username-err" role="alert"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="field-group" id="fg-su-email">
+              <label for="su-email">Email</label>
+              <div class="input-wrap">
+                <i data-lucide="mail" class="input-icon"></i>
+                <input type="email" id="su-email" name="email" placeholder="you@example.com" autocomplete="email"
+                  aria-describedby="su-email-err" />
+              </div>
+              <span class="field-error" id="su-email-err" role="alert"></span>
+            </div>
+
+            <!-- Phone -->
+            <div class="field-group" id="fg-phone">
+              <label for="phone">Phone Number <span class="optional">(optional)</span></label>
+              <div class="input-wrap">
+                <i data-lucide="phone" class="input-icon"></i>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="field-group" id="fg-su-pass">
+              <label for="su-password">Password</label>
+              <div class="input-wrap">
+                <i data-lucide="lock" class="input-icon"></i>
+                <input type="password" id="su-password" name="password" placeholder="••••••••"
+                  autocomplete="new-password" aria-describedby="su-pass-err" oninput="checkStrength(this.value)" />
+                <button type="button" class="eye-btn" onclick="togglePwd('su-password', this)"
+                  aria-label="Show password">
+                  <i data-lucide="eye"></i>
+                </button>
+              </div>
+              <!-- Strength meter -->
+              <div class="strength-wrap" id="strengthWrap" aria-live="polite">
+                <div class="strength-bar">
+                  <div class="strength-seg" id="s1"></div>
+                  <div class="strength-seg" id="s2"></div>
+                  <div class="strength-seg" id="s3"></div>
+                  <div class="strength-seg" id="s4"></div>
+                </div>
+                <span class="strength-label" id="strengthLabel"></span>
+              </div>
+              <span class="field-error" id="su-pass-err" role="alert"></span>
+            </div>
+
+            <!-- Confirm password -->
+            <div class="field-group" id="fg-confirm">
+              <label for="confirm-password">Confirm Password</label>
+              <div class="input-wrap">
+                <i data-lucide="lock" class="input-icon"></i>
+                <input type="password" id="confirm-password" name="confirm" placeholder="••••••••"
+                  autocomplete="new-password" aria-describedby="confirm-err" oninput="checkMatch()" />
+                <button type="button" class="eye-btn" onclick="togglePwd('confirm-password', this)"
+                  aria-label="Show password">
+                  <i data-lucide="eye"></i>
+                </button>
+                <span class="match-icon" id="matchIcon" aria-hidden="true"></span>
+              </div>
+              <span class="field-error" id="confirm-err" role="alert"></span>
+            </div>
+
+            <!-- Terms -->
+            <div class="checkbox-row" id="fg-terms">
+              <label class="checkbox-label">
+                <input type="checkbox" id="terms" name="terms" />
+                <span class="checkbox-custom"></span>
+                <span>I agree to the <a href="#" class="inline-link">Terms of Service</a> and <a href="#"
+                    class="inline-link">Privacy Policy</a></span>
+              </label>
+              <span class="field-error" id="terms-err" role="alert" style="margin-left:28px;"></span>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn" id="signupBtn">
+              <span class="btn-text">Create Account</span>
+              <span class="btn-loader" aria-hidden="true"></span>
+              <i data-lucide="arrow-right" class="btn-icon"></i>
+            </button>
+          </form>
+
+          <p class="switch-hint">
+            Already have an account?
+            <button class="link-btn" onclick="switchTab('login')">Sign in →</button>
+          </p>
+        </div>
+
+      </div><!-- /auth-card -->
+    </div><!-- /right-panel -->
+
+  </div><!-- /auth-layout -->
+
+  <script src="auth.js"></script>
+</body>
+
+</html>
